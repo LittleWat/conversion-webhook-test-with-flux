@@ -32,6 +32,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	cwtestv1alpha1 "github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha1"
+	cwtestv1alpha2 "github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha2"
 	"github.com/littlewat/conversion-webhook-test-with-flux/controllers"
 	//+kubebuilder:scaffold:imports
 )
@@ -45,6 +46,7 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
 	utilruntime.Must(cwtestv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(cwtestv1alpha2.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 

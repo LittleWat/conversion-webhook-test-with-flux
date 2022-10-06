@@ -16,4 +16,12 @@ resources:
   webhooks:
     conversion: true
     webhookVersion: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: littlewat.github.io
+  group: cwtest
+  kind: TestResource
+  path: github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha2
+  version: v1alpha2
 version: "3"
