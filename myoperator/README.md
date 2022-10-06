@@ -97,3 +97,7 @@ limitations under the License.
 ```sh
 kubebuilder init --domain littlewat.github.io --repo github.com/littlewat/conversion-webhook-test-with-flux
 ```
+
+```sh
+kubebuilder create api --group cwtest --version v1alpha1 --kind TestResource
+```

@@ -1,0 +1,33 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - cwtest.littlewat.github.io
+  resources:
+  - testresources
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cwtest.littlewat.github.io
+  resources:
+  - testresources/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - cwtest.littlewat.github.io
+  resources:
+  - testresources/status
+  verbs:
+  - get
+  - patch
+  - update

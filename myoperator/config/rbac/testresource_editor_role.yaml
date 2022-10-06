@@ -1,0 +1,31 @@
+# permissions for end users to edit testresources.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: testresource-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: myoperator
+    app.kubernetes.io/part-of: myoperator
+    app.kubernetes.io/managed-by: kustomize
+  name: testresource-editor-role
+rules:
+- apiGroups:
+  - cwtest.littlewat.github.io
+  resources:
+  - testresources
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cwtest.littlewat.github.io
+  resources:
+  - testresources/status
+  verbs:
+  - get

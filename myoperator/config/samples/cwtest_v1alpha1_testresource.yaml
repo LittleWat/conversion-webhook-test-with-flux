@@ -1,0 +1,12 @@
+apiVersion: cwtest.littlewat.github.io/v1alpha1
+kind: TestResource
+metadata:
+  labels:
+    app.kubernetes.io/name: testresource
+    app.kubernetes.io/instance: testresource-sample
+    app.kubernetes.io/part-of: myoperator
+    app.kuberentes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: myoperator
+  name: testresource-sample
+spec:
+  # TODO(user): Add fields here
