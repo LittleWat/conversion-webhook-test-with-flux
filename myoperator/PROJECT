@@ -1,0 +1,6 @@
+domain: littlewat.github.io
+layout:
+- go.kubebuilder.io/v3
+projectName: myoperator
+repo: github.com/littlewat/conversion-webhook-test-with-flux
+version: "3"
