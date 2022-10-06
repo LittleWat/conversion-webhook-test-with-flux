@@ -101,3 +101,7 @@ kubebuilder init --domain littlewat.github.io --repo github.com/littlewat/conver
 ```sh
 kubebuilder create api --group cwtest --version v1alpha1 --kind TestResource
 ```
+
+```sh
+kubebuilder create webhook --group cwtest --version v1alpha1 --kind TestResource --conversion
+```
