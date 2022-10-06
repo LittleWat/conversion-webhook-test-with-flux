@@ -24,4 +24,7 @@ resources:
   kind: TestResource
   path: github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha2
   version: v1alpha2
+  webhooks:
+    conversion: true
+    webhookVersion: v1
 version: "3"

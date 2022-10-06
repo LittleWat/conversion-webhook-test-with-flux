@@ -25,6 +25,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	cwtestv1alpha1 "github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha1"
+	"github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha2"
 )
 
 // TestResourceReconciler reconciles a TestResource object
@@ -48,8 +49,16 @@ type TestResourceReconciler struct {
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.13.0/pkg/reconcile
 func (r *TestResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
+	rlog := log.Log.WithName("TestResourceReconciler")
+	rlog.Info("Reconcile is called")
 
-	// TODO(user): your logic here
+	testResource := &v1alpha2.TestResource{}
+	// Check if the Kafka object is defined, throw an error and requeue if not defined yet
+	err := r.Get(ctx, req.NamespacedName, testResource)
+	if err != nil {
+		return ctrl.Result{}, err
+	}
+	rlog.Info("Found CR spec", "testResource", testResource)
 
 	return ctrl.Result{}, nil
 }

@@ -105,3 +105,7 @@ kubebuilder create api --group cwtest --version v1alpha1 --kind TestResource
 ```sh
 kubebuilder create webhook --group cwtest --version v1alpha1 --kind TestResource --conversion
 ```
+
+```sh
+kubebuilder create webhook --group cwtest --version v1alpha2 --kind TestResource --conversion
+```
