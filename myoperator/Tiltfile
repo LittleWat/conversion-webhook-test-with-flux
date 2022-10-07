@@ -51,4 +51,4 @@ def kubebuilder(IMG='controller:latest', CONTROLLERGEN='crd rbac:roleName=manage
     )
 
 deploy_cert_manager(version="v1.6.1")
-kubebuilder('test-resource-controller')
+kubebuilder('test-resource-controller:latest')
