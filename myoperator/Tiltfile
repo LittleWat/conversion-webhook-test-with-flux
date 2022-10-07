@@ -5,7 +5,7 @@ def kubebuilder(IMG='controller:latest', CONTROLLERGEN='crd rbac:roleName=manage
 
     DOCKERFILE = '''FROM golang:alpine
     WORKDIR /
-    COPY ./bin/manager /
+    COPY ./tilt_bin/manager /
     CMD ["/manager"]
     '''
 
@@ -19,7 +19,7 @@ def kubebuilder(IMG='controller:latest', CONTROLLERGEN='crd rbac:roleName=manage
         return 'go vet ./...; go fmt ./...'
 
     def binary():
-        return 'CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -o bin/manager main.go'
+        return 'CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -o tilt_bin/manager main.go'
 
 
     installed = local("which kubebuilder")
@@ -45,9 +45,9 @@ def kubebuilder(IMG='controller:latest', CONTROLLERGEN='crd rbac:roleName=manage
     docker_build_with_restart(IMG, '.',
      dockerfile_contents=DOCKERFILE,
      entrypoint='/manager',
-     only=['./bin/manager'],
+     only=['./tilt_bin/manager'],
      live_update=[
-           sync('./bin/manager', '/manager'),
+           sync('./tilt_bin/manager', '/manager'),
        ]
     )
 
