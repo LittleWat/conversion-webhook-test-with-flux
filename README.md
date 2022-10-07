@@ -1,8 +1,9 @@
 # conversion-webhook-test-with-flux
 
 This is the repo to reproduce the error that is posted in
-- [How can the flux error related to conversion webhook be resolved? · Discussion #3105 · fluxcd/flux2](https://github.com/fluxcd/flux2/discussions/3105)
-- [`dry-run` sometimes misses metadata and causes `failed to prune fields` error during CRD conversion · Issue #227 · kubernetes-sigs/structured-merge-diff](https://github.com/kubernetes-sigs/structured-merge-diff/issues/227)
+- flux issue: [Using conversion webhooks produces the `invalid metadata of type <nil> in input object` error · Issue #3179 · fluxcd/flux2](https://github.com/fluxcd/flux2/issues/3179)
+- flux question: [How can the flux error related to conversion webhook be resolved? · Discussion #3105 · fluxcd/flux2](https://github.com/fluxcd/flux2/discussions/3105)
+- structured-merge-diff issue: [`dry-run` sometimes misses metadata and causes `failed to prune fields` error during CRD conversion · Issue #227 · kubernetes-sigs/structured-merge-diff](https://github.com/kubernetes-sigs/structured-merge-diff/issues/227)
 
 
 ## directory structure
@@ -73,7 +74,7 @@ Deploy the flux-system:
 kubectl apply -k ./flux/flux-system
 ```
 
-### Wait until the resource is deployed
+### Wait until the resource is deployed by flux
 
 Please wait a minute.
 The resources in `~/flux/flux-resources` will be deployed.
