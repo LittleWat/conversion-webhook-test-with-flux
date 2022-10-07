@@ -31,7 +31,12 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 
 ### Deploy myoperator
 
-myoperator.yaml is generated with the following command:
+myoperator is a simple operator that 
+- uses the conversion webhook that converts v1alpha1 to v1alpha2
+- updates the status of TestResource
+
+`./myoperator.yaml` is generated with the following command:
+
 The image is replaced with `ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-amd64`
 For m1 mac user, please use `ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-arm64`
 
@@ -40,7 +45,7 @@ cd myoperator
 kustomize build config/default > ../myoperator.yaml
 ```
 
-Deploy it
+Deploy the operator
 
 ```shell
 kubectl apply -f myoperator.yaml
@@ -49,10 +54,20 @@ kubectl apply -f myoperator.yaml
 
 ### Start flux
 
-```shell
-flux bootstrap github --owner=$GITHUB_USERNAME --repository=conversion-webhook-test-with-flux --branch=main --path=./flux --personal
+Export your GitHub personal access token and username:
 
+```shell
+export GITHUB_USER=<YOUR_GITHUB_USER>
+export GITHUB_TOKEN=<YOUR_GITHUB_TOKEN>
 ```
+
+Create the secret:
+
+```shell
+flux create secret git flux-system -u $GITHUB_USER -p $GITHUB_TOKEN --url https://github.com/LittleWat/conversion-webhook-test-with-flux.git
+```
+
+Deploy the flux-system:
 
 ```shell
 kubectl apply -k ./flux/flux-system
@@ -61,10 +76,11 @@ kubectl apply -k ./flux/flux-system
 ### Wait until the resource is deployed
 
 Please wait a minute.
-You will see that the resource in `~/flux/flux-resources` is deployed.
+The resources in `~/flux/flux-resources` will be deployed.
  
 ```shell
 $ kubectl  get testresource -A
+
 NAMESPACE         NAME                           AGE
 v1alpha1-flux     testresource-v1alpha1-flux     1m
 v1alpha2-flux     testresource-v1alpha2-flux     1m
@@ -73,7 +89,8 @@ v1alpha2-flux     testresource-v1alpha2-flux     1m
 ### Check the dry-run result
 
 Please repeat the following dry-run command.
-Sometimes the dry-run command gets the following error message.
+Sometimes the dry-run command gets the following error message:
+
 ```shell
 $ kubectl apply --server-side --dry-run=server -f ./flux/flux-resources/cwtest_v1alpha1_testresource.yaml --field-manager kustomize-controller
 
@@ -81,7 +98,7 @@ namespace/v1alpha1-flux serverside-applied (server dry run)
 Error from server: failed to prune fields: failed add back owned items: failed to convert pruned object at version cwtest.littlewat.github.io/v1alpha1: conversion webhook for cwtest.littlewat.github.io/v1alpha2, Kind=TestResource returned invalid metadata: invalid metadata of type <nil> in input object
 ```
 
-Check the managed field.
+Check the managed field:
 
 ```yaml
 $ kubectl get testresource -n v1alpha1-flux testresource-v1alpha1-flux -o yaml --show-managed-fields
@@ -129,12 +146,18 @@ status:
 
 The sample resources to deploy by hand is in `myoperator/config/samples`
 
-Deploy the v1a1 resource.
+Deploy the v1a1 resource:
+
 ```shell
 kubectl apply --server-side -f ./myoperator/config/samples/cwtest_v1alpha1_testresource.yaml
 ```
 
-Repeating the dry-run command never get failed.
+Repeating the dry-run command never get failed:
+
 ```shell
 kubectl apply --server-side --dry-run=server -f ./myoperator/config/samples/cwtest_v1alpha1_testresource.yaml
 ```
+
+From this, it can be said that there is  a difference between the deployment in flux and `kubectl apply --server-side`.
+
+I am glad if this repo is useful for debugging. Thank you!
