@@ -32,7 +32,8 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 ### Deploy myoperator
 
 myoperator.yaml is generated with the following command:
-(The image is replaced with `ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:latest`)
+The image is replaced with `ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-amd64`
+For m1 mac user, please use `ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-arm64`
 
 ```shell
 cd myoperator

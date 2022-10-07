@@ -403,7 +403,8 @@ spec:
         command:
         - /manager
 #        image: test-resource-controller:latest
-        image: ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:latest
+        image: ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-amd64
+#        image: ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-arm64  # for m1 mac
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
