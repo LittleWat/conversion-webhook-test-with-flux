@@ -24,33 +24,48 @@ This is the repo to reproduce the error that is posted in
 minikube start 
 ```
 
-### Deploy cert-manager
+### Deploy `myoperator`
+
+`myoperator` is a simple operator that 
+- uses the conversion webhook that converts v1alpha1 to v1alpha2
+- updates the status of TestResource
+
+There are two ways to deploy myoperator
+
+- With Tilt
+- Wighout Tilt
+
+Tilt would be useful to debug quickly.
+
+#### With Tilt
+
+```shell
+cd myoperator
+tilt up
+```
+
+#### Without Tilt
+
+First, deploy cert-manager:
 
 ```shell
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
 ```
 
-### Deploy myoperator
+Then, deploy the operator:
 
-myoperator is a simple operator that 
-- uses the conversion webhook that converts v1alpha1 to v1alpha2
-- updates the status of TestResource
+```shell
+kubectl apply -f myoperator.yaml
+```
 
 `./myoperator.yaml` is generated with the following command:
-
-The image is replaced with `ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-amd64`
-For m1 mac user, please use `ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-arm64`
 
 ```shell
 cd myoperator
 kustomize build config/default > ../myoperator.yaml
 ```
-
-Deploy the operator
-
-```shell
-kubectl apply -f myoperator.yaml
-```
+(The image is replaced with `ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-amd64`
+For m1 mac user, please use `ghcr.io/littlewat/conversion-webhook-test-with-flux/test-resource-controller:aea67ff-arm64`)
 
 
 ### Start flux
