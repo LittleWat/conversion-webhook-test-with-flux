@@ -23,6 +23,12 @@ make deploy
 
 
 ## Start flux
+
+```shell
+flux bootstrap github --owner=$GITHUB_USERNAME --repository=conversion-webhook-test-with-flux --branch=main --path=./flux --personal
+
+```
+
 ```shell
 kubectl apply -k ./flux/flux-system
 ```

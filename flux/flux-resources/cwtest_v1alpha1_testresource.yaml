@@ -1,6 +1,15 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: v1alpha1-sample
+  labels:
+    name: v1alpha1-sample
+---
 apiVersion: cwtest.littlewat.github.io/v1alpha1
 kind: TestResource
 metadata:
   name: testresource-v1alpha1-sample
+  namespace: v1alpha1-sample
 spec:
   foo: "v1alpha1Foo"
