@@ -21,6 +21,7 @@ def kubebuilder(IMG='controller:latest', CONTROLLERGEN='crd rbac:roleName=manage
     def binary():
         return 'CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -o bin/manager main.go'
 
+
     installed = local("which kubebuilder")
     print("kubebuilder is present:", installed)
 
@@ -51,4 +52,4 @@ def kubebuilder(IMG='controller:latest', CONTROLLERGEN='crd rbac:roleName=manage
     )
 
 deploy_cert_manager(version="v1.9.1")
-kubebuilder("myoperator:latest")
+kubebuilder("test-resource-controller:latest")

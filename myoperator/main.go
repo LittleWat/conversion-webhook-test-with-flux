@@ -98,6 +98,10 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "TestResource")
 		os.Exit(1)
 	}
+	if err = (&cwtestv1alpha1.TestResource{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "TestResource")
+		os.Exit(1)
+	}
 	if err = (&cwtestv1alpha2.TestResource{}).SetupWebhookWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create webhook", "webhook", "TestResource")
 		os.Exit(1)

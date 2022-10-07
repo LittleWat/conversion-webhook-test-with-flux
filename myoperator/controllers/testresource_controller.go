@@ -39,25 +39,29 @@ type TestResourceReconciler struct {
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
-// TODO(user): Modify the Reconcile function to compare the state specified by
-// the TestResource object against the actual cluster state, and then
-// perform operations to make the cluster state reflect the state specified by
-// the user.
-//
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.13.0/pkg/reconcile
 func (r *TestResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 	rlog := log.Log.WithName("TestResourceReconciler")
-	rlog.Info("Reconcile is called")
+	rlog.Info("----------------------------------")
+	rlog.Info("Reconcile is called!")
 
 	testResource := &cwtestv1alpha2.TestResource{}
 	// Check if the Kafka object is defined, throw an error and requeue if not defined yet
 	err := r.Get(ctx, req.NamespacedName, testResource)
 	if err != nil {
+		rlog.Info("Failed in r.Get", "testResource", testResource)
 		return ctrl.Result{}, err
 	}
 	rlog.Info("Found CR spec", "testResource", testResource)
+
+	testResource.Status.State = testResource.Spec.Foo + "-OK"
+	err = r.Status().Update(ctx, testResource)
+	if err != nil {
+		rlog.Info("Failed in r.Status().Update", "testResource", testResource)
+		return ctrl.Result{}, err
+	}
 
 	return ctrl.Result{}, nil
 }

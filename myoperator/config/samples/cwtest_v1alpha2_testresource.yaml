@@ -13,4 +13,4 @@ metadata:
   namespace: v1alpha2-manual
 spec:
   foo: "v1alpha2Foo"
-  bar: "v1alpha2FooBar"
+  bar: "v1alpha2Foo1Bar"

@@ -2,15 +2,15 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: v1alpha2-sample
+  name: v1alpha2-flux
   labels:
-    name: v1alpha2-sample
+    name: v1alpha2-flux
 ---
 apiVersion: cwtest.littlewat.github.io/v1alpha2
 kind: TestResource
 metadata:
-  name: testresource-v1alpha2-sample
-  namespace: v1alpha2-sample
+  name: testresource-v1alpha2-flux
+  namespace: v1alpha2-flux
 spec:
   foo: "v1alpha2Foo"
   bar: "v1alpha2FooBar"
