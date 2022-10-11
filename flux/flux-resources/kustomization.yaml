@@ -7,4 +7,5 @@ resources:
 #- cwtest_v1alpha2_testresource.yaml
 
 ## operators
-- cwtest_v1alpha1_original.yaml
+#- cwtest_v1alpha1_original.yaml
+- cwtest_v1alpha1_foo_renamed.yaml
