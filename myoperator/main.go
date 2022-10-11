@@ -32,7 +32,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	cwtestv1alpha1 "github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha1"
-	cwtestv1alpha2 "github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha2"
 	"github.com/littlewat/conversion-webhook-test-with-flux/controllers"
 	//+kubebuilder:scaffold:imports
 )
@@ -46,7 +45,6 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
 	utilruntime.Must(cwtestv1alpha1.AddToScheme(scheme))
-	utilruntime.Must(cwtestv1alpha2.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
@@ -102,10 +100,7 @@ func main() {
 		setupLog.Error(err, "unable to create webhook", "webhook", "TestResource")
 		os.Exit(1)
 	}
-	if err = (&cwtestv1alpha2.TestResource{}).SetupWebhookWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create webhook", "webhook", "TestResource")
-		os.Exit(1)
-	}
+
 	//+kubebuilder:scaffold:builder
 
 	if err := mgr.AddHealthzCheck("healthz", healthz.Ping); err != nil {

@@ -41,6 +41,7 @@ type TestResourceStatus struct {
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
+//+kubebuilder:storageversion
 
 // TestResource is the Schema for the testresources API
 type TestResource struct {
