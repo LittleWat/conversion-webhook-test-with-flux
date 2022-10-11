@@ -28,8 +28,8 @@ type TestResourceSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of TestResource. Edit testresource_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// RenamedFoo is an example field of TestResource. Edit testresource_types.go to remove/update
+	RenamedFoo string `json:"renamedFoo,omitempty"`
 }
 
 // TestResourceStatus defines the observed state of TestResource
@@ -41,6 +41,7 @@ type TestResourceStatus struct {
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
+//+kubebuilder:storageversion
 
 // TestResource is the Schema for the testresources API
 type TestResource struct {

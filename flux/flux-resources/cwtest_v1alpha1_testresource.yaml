@@ -12,4 +12,4 @@ metadata:
   name: testresource-v1alpha1-flux
   namespace: v1alpha1-flux
 spec:
-  foo: "v1alpha1Foo"
+  renamedFoo: "v1alpha1Foo"

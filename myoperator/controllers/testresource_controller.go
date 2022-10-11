@@ -24,7 +24,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
-	cwtestv1alpha2 "github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha2"
+	cwtestv1alpha1 "github.com/littlewat/conversion-webhook-test-with-flux/api/v1alpha1"
 )
 
 // TestResourceReconciler reconciles a TestResource object
@@ -47,7 +47,7 @@ func (r *TestResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request
 	rlog.Info("----------------------------------")
 	rlog.Info("Reconcile is called!")
 
-	testResource := &cwtestv1alpha2.TestResource{}
+	testResource := &cwtestv1alpha1.TestResource{}
 	// Check if the Kafka object is defined, throw an error and requeue if not defined yet
 	err := r.Get(ctx, req.NamespacedName, testResource)
 	if err != nil {
@@ -56,7 +56,8 @@ func (r *TestResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request
 	}
 	rlog.Info("Found CR spec", "testResource", testResource)
 
-	testResource.Status.State = testResource.Spec.Foo + "-OK"
+	//testResource.Status.State = testResource.Spec.Foo + "-OK"
+	testResource.Status.State = "OK"
 	err = r.Status().Update(ctx, testResource)
 	if err != nil {
 		rlog.Info("Failed in r.Status().Update", "testResource", testResource)
@@ -69,6 +70,6 @@ func (r *TestResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request
 // SetupWithManager sets up the controller with the Manager.
 func (r *TestResourceReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&cwtestv1alpha2.TestResource{}).
+		For(&cwtestv1alpha1.TestResource{}).
 		Complete(r)
 }
