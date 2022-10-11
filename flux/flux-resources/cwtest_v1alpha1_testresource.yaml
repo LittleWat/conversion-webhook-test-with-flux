@@ -11,5 +11,5 @@ kind: TestResource
 metadata:
   name: testresource-v1alpha1-flux
   namespace: v1alpha1-flux
-spec:
-  foo: "v1alpha1Foo"
+#spec:
+#  foo: "v1alpha1Foo"
