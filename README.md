@@ -80,10 +80,12 @@ export GITHUB_TOKEN=<YOUR_GITHUB_TOKEN>
 Create the secret:
 
 ```shell
+kubectl create ns flux-system
+   
 flux create secret git flux-system -u $GITHUB_USER -p $GITHUB_TOKEN --url https://github.com/LittleWat/conversion-webhook-test-with-flux.git
 ```
 
-Deploy the flux-system:
+Deploy the flux-system (you need to run twice):
 
 ```shell
 kubectl apply -k ./flux/flux-system
