@@ -29,7 +29,7 @@ type TestResourceSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of TestResource. Edit testresource_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	//Foo string `json:"foo,omitempty"`
 }
 
 // TestResourceStatus defines the observed state of TestResource

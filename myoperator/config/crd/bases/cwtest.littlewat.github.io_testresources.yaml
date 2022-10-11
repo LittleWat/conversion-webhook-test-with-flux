@@ -34,11 +34,6 @@ spec:
             type: object
           spec:
             description: TestResourceSpec defines the desired state of TestResource
-            properties:
-              foo:
-                description: Foo is an example field of TestResource. Edit testresource_types.go
-                  to remove/update
-                type: string
             type: object
           status:
             description: TestResourceStatus defines the observed state of TestResource

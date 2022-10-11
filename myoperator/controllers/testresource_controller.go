@@ -56,7 +56,8 @@ func (r *TestResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request
 	}
 	rlog.Info("Found CR spec", "testResource", testResource)
 
-	testResource.Status.State = testResource.Spec.Foo + "-OK"
+	//testResource.Status.State = testResource.Spec.Foo + "-OK"
+	testResource.Status.State = "OK"
 	err = r.Status().Update(ctx, testResource)
 	if err != nil {
 		rlog.Info("Failed in r.Status().Update", "testResource", testResource)
